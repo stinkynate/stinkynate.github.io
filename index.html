@@ -1,1 +1,23 @@
-Hello World
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+function arrayToTable(tableData) {
+    var table = $('<table></table>');
+    $(tableData).each(function (i, rowData) {
+        var row = $('<tr></tr>');
+        $(rowData).each(function (j, cellData) {
+            row.append($('<td>'+cellData+'</td>'));
+        });
+        table.append(row);
+    });
+    return table;
+}
+
+$('body').append(arrayToTable([
+    ["John","Slegers",34],
+    ["Tom","Stevens",25],
+    ["An","Davies",28],
+    ["Miet","Hansen",42],
+    ["Eli","Morris",18]
+]));
+
+<body />
