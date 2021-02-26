@@ -1,5 +1,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
+<script>
 function arrayToTable(tableData) {
     var table = $('<table></table>');
     $(tableData).each(function (i, rowData) {
@@ -19,5 +20,10 @@ $('body').append(arrayToTable([
     ["Miet","Hansen",42],
     ["Eli","Morris",18]
 ]));
+
+$( document ).ready(function() {
+    arrayToTable({"tsvs6": "test", "tsv7": "test2"});
+});
+</script>
 
 <body />
