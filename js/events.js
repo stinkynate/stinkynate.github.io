@@ -18,10 +18,11 @@ Papa.parse("https://stinkynate.github.io/events.csv", {
 		  "<td>"+results.data[i][1]+"</td>"+ // Tag
 		  "<td>"+results.data[i][2]+ "</td>"+ // Event
 		  "<td><img class='pokemon' src='https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/"+results.data[i][4].toLowerCase()+".png' inline=false/>"+results.data[i][4]+ "</td>"+ // Pokemon
-		  "<td>"+results.data[i][6]+ "</td>"+ // Shiny
-		  "<td><img class='ball' src='https://raw.githubusercontent.com/msikma/pokesprite/master/icons/ball/cherish.png'/>"+results.data[i][8]+"</td>"+ // Ball
-		  "<td>"+results.data[i][9]+ "</td>"+ // Level
-		  "<td>"+results.data[i][10]+ "</td>"); // Gender
+		  "<td>"+results.data[i][5]+ "</td>"+ // Shiny
+		  "<td><img class='ball' src='https://raw.githubusercontent.com/msikma/pokesprite/master/icons/ball/cherish.png'/>"+results.data[i][6]+"</td>"+ // Ball
+		  "<td>"+results.data[i][7]+ "</td>"+ // Level
+		  "<td>"+results.data[i][8]+ "</td>"+ // Gender
+		  "<td>"+results.data[i][23]+ "</td>"); // OT
 		}
 	}
 });
