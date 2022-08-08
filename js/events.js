@@ -1,4 +1,4 @@
-Papa.parse("https://stinkynate.github.io/events.csv", {
+Papa.parse("https://stinkynate.github.io/events.csv"+"?_="+ (new Date).getTime(), {
 	worker: true,
 	//header: true,
 	download: true,
@@ -10,19 +10,55 @@ Papa.parse("https://stinkynate.github.io/events.csv", {
 		//d3.event.preventDefault();
 		
 		for (var i = 3; i < results.data.length; i++) {
-		   //console.log(results.data[5][3]);
-		  // console.log(output[i]['avg_vote'])
-		  // d3.select("tbody>tr>td").text(output[i]['original_title']);
-		  d3.select("tbody").insert("tr").html(
-		  "<td>"+(i-2)+"</td>"+
-		  "<td>"+results.data[i][1]+"</td>"+ // Tag
-		  "<td>"+results.data[i][2]+ "</td>"+ // Event
-		  "<td><img class='pokemon' src='https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/"+results.data[i][4].toLowerCase()+".png' inline=false/>"+results.data[i][4]+ "</td>"+ // Pokemon
-		  "<td>"+results.data[i][5]+ "</td>"+ // Shiny
-		  "<td><img class='ball' src='https://raw.githubusercontent.com/msikma/pokesprite/master/icons/ball/cherish.png'/>"+results.data[i][6]+"</td>"+ // Ball
-		  "<td>"+results.data[i][7]+ "</td>"+ // Level
-		  "<td>"+results.data[i][8]+ "</td>"+ // Gender
-		  "<td>"+results.data[i][23]+ "</td>"); // OT
+		  var row = results.data[i];
+		  if (row.length <= 1)
+			  continue;
+
+		  var rowHtml = "<td>"+(i-2)+"</td>";
+		  rowHtml += addTag(row);
+		  rowHtml += addEvent(row);
+		  rowHtml += addPokemon(row,i);
+		  rowHtml += addShiny(row);
+		  rowHtml += addLevel(row);
+		  rowHtml += addGender(row);
+		  rowHtml += addOT(row);
+		  d3.select("tbody").insert("tr").html(rowHtml);
 		}
 	}
 });
+
+function addTag(row)
+{
+	return "<td>"+row[1]+"</td>";
+}
+function addEvent(row)
+{
+	return "<td><a href='"+row[3]+"' target='_blank'>"+row[2]+ "</a></td>"
+}
+function addPokemon(row, i)
+{
+	var shinyLink = row[5] == "" ? "normal" : "shiny";
+	return "<td><img class='pokemon' src='https://projectpokemon.org/images/sprites-models/swsh-"+shinyLink+"-sprites/"+row[4].toLowerCase()+".gif'/>"+row[4]+ "</td>";
+	//https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/
+	//https://projectpokemon.org/images/sprites-models/swsh-normal-sprites/grookey.gif
+}
+function addShiny(row)
+{
+	return "<td>"+row[5]+ "</td>";
+}
+function addBall(row)
+{
+	return "<td><img class='ball' src='https://raw.githubusercontent.com/msikma/pokesprite/master/icons/ball/cherish.png'/>"+results.data[i][6]+"</td>";
+}
+function addLevel(row)
+{
+	return "<td>"+row[7]+ "</td>";
+}
+function addGender(row)
+{
+	return "<td>"+row[8]+ "</td>";
+}
+function addOT(row)
+{
+	return "<td>"+row[23]+ "</td>";
+}
