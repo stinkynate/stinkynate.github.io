@@ -70,7 +70,7 @@ function addBall(row)
 	var ball = row[6] == "" ? "" : ballMap.get(row[6]);
 	if (ball == undefined)
 		console.log(row[6]);
-	return "<td><img class='ball' src='"+ball+"'/>"+row[6]+"</td>";
+	return "<td><img class='ball' src='"+ball+"' alt='"+row[6]+"' title='"+row[6]+"'/></td>";
 }
 function addLevel(row)
 {
