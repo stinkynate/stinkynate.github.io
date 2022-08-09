@@ -54,9 +54,6 @@ function parseEvents()
 				tr.classed("traded", true);  
 			}
 			
-			var $table = $('table');
-			$table.floatThead();
-			
 			filterTable("showTraded", "traded");
 			filterTable("showPersonal", "personal");
 		}
@@ -183,8 +180,7 @@ function loadMsikma(img)
 function reflow()
 {
 	var $table = $('table');
-	$table.floatThead('reflow');
-	console.log("reflowing");
+	$table.floatThead();
 }
 
 function filterTable(name, className) {
