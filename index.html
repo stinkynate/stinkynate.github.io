@@ -26,6 +26,10 @@
 	  border-collapse: collapse;
 	  position: sticky;
 	}
+	td, th {
+	  border: 1px solid #ddd;
+	  padding: 2px;
+	}
 	th {
 	  background-color: red;
 	}
@@ -45,9 +49,15 @@
 	div.msikma {
 		height: 40px;
 	}
-	.mx-auto {
-  width: 100%;
-  overflow-y: auto;
+    tr:nth-child(even){background-color: #f2f2f2;}
+    tr:hover {background-color: #ddd;}
+
+	th {
+	  padding-top: 12px;
+	  padding-bottom: 12px;
+	  text-align: left;
+	  background-color: #04AA6D;
+	  color: white;
 	}
   </style>
 </head>
