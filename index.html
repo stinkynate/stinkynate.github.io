@@ -69,10 +69,14 @@
 <body>
 	<div class="row">
 		<p>Welcome to Stinkynate's (in progress) events "sheet"!</p>
-		<input type="checkbox" id="showTraded" name="showTraded" onclick="filterTable('showTraded', 'traded')">
+		<label for="filter">Text Filter:</label>
+		<input id="filter" name="filter" onchange="filterTable()">
+		<input type="checkbox" id="showTraded" name="showTraded" onclick="filterTable()">
 		<label for="showTraded"> Show Traded</label>
-		<input type="checkbox" id="showPersonal" name="showPersonal" onclick="filterTable('showPersonal', 'personal')">
+		<input type="checkbox" id="showPersonal" name="showPersonal" onclick="filterTable()">
 		<label for="showPersonal"> Show Personal</label>
+		<input type="checkbox" id="showMultiples" name="showMultiples" onclick="filterTable()">
+		<label for="showMultiples"> Show Multiples</label>
 		<br>
 		
 		<table class="table" id="eventTable">

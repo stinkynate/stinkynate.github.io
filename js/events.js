@@ -50,12 +50,13 @@ function parseEvents()
 			  var tr = d3.select("tbody").insert("tr").html(rowHtml);
 			  if (row[36]=="TRUE")
 				tr.classed("personal", true);
-			  else if (row[37]=="TRUE")
+			  else if (row[37]=="TRUE") // Keep these mutually exclusive
 				tr.classed("traded", true);  
+			  else if (row[39]=="TRUE") // No need to mark as a multiple if it's traded or personal
+				tr.classed("multiple", true);
 			}
 			
-			filterTable("showTraded", "traded");
-			filterTable("showPersonal", "personal");
+			filterTable();
 		}
 	});
 
@@ -96,8 +97,8 @@ function addBall(row, first)
 	if (ball == undefined)
 		console.log(row[7]);
 	// Reflow after first ball loads to make sure columns line up with header
-	var reflow = first ? " onLoad='reflow()' " : "";
-	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'"+reflow+"/></td>";
+	var floatHeader = first ? " onLoad='floatHeader()' " : "";
+	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'"+floatHeader+"/></td>";
 }
 function addLevel(row)
 {
@@ -177,29 +178,66 @@ function loadMsikma(img)
 	img.src = "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/"+shinyLink+"/"+pokemon+".png"
 }
 
-function reflow()
+function floatHeader()
 {
 	var $table = $('table');
 	$table.floatThead();
 }
 
-function filterTable(name, className) {
-  // Declare variables
-  var input, filter, table, tr, i;
-  input = document.getElementById(name);
-  filter = input.checked;
-  table = document.getElementById("eventTable");
-  tr = table.getElementsByClassName(className);
+function reflow()
+{
+	var $table = $('table');
+	$table.floatThead('reflow');
+}
 
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-	if (filter)
-		tr[i].style.display = "";
-	else
-		tr[i].style.display = "none";
+function filterTable() {
+  // Declare variables
+  var traded, personal, multiples, showTraded, showPersonal, showMultiples, filter, filterText;
+  traded = document.getElementById("showTraded");
+  showTraded = traded.checked;
+  personal = document.getElementById("showPersonal");
+  showPersonal = personal.checked;
+  multiples = document.getElementById("showMultiples");
+  showMultiples = multiples.checked;
+  filter = document.getElementById("filter");
+  filterText = filter.value;
+  
+  var showSelector = "#eventTable tbody tr"
+  $(showSelector).hide();
+  
+  if (!showTraded||!showPersonal||!showMultiples)
+  {
+	  showSelector += ":not("
+	  if (!showTraded)
+	  {
+		  showSelector += ".traded";
+	  }
+	  if (!showPersonal)
+	  {
+		  if (!showTraded)
+			  showSelector += ",";
+		  showSelector += ".personal";
+	  }
+	  if (!showMultiples)
+	  {
+		  if (!showTraded||!showPersonal)
+			  showSelector += ",";
+		  showSelector += ".multiple";
+	  }
+	  showSelector += ")";
   }
+  showSelector += " td"
+  $(showSelector).filter(function () {
+        var $t = $(this);
+		if ($t.text().toLowerCase().indexOf(filterText) > -1) {
+			return true;
+		}
+        return false;
+    }).parent().show();
   
   $("table tbody tr").removeClass("odd even");
   $("table tbody tr:visible:odd").addClass("odd");
   $("table tbody tr:visible:even").addClass("even");
+  
+  reflow();
 }
