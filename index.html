@@ -70,11 +70,16 @@
 	<div class="row">
 		<p>Welcome to Stinkynate's (in progress) events "sheet"!</p>
 		<label for="filter">Text Filter:</label>
-		<input id="filter" name="filter" onchange="filterTable()">
-		<input type="checkbox" id="showTraded" name="showTraded" onclick="filterTable()">
+		<input id="filter" name="filter" onchange="filterTable()" onkeyup="filterTable()">
+		<input type="radio" id="showFT" name="showType" onclick="filterTable()" value="ft" checked=true>
+		<label for="showFT"> Show FT</label>
+		<input type="radio" id="showTraded" name="showType" onclick="filterTable()" value="traded">
 		<label for="showTraded"> Show Traded</label>
-		<input type="checkbox" id="showPersonal" name="showPersonal" onclick="filterTable()">
+		<input type="radio" id="showPersonal" name="showType" onclick="filterTable()" value="personal">
 		<label for="showPersonal"> Show Personal</label>
+		<input type="radio" id="showAll" name="showType" onclick="filterTable()" value="all">
+		<label for="showAll"> Show All</label>
+		
 		<input type="checkbox" id="showMultiples" name="showMultiples" onclick="filterTable()">
 		<label for="showMultiples"> Show Multiples</label>
 		<br>

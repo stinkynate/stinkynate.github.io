@@ -51,9 +51,13 @@ function parseEvents()
 			  if (row[36]=="TRUE")
 				tr.classed("personal", true);
 			  else if (row[37]=="TRUE") // Keep these mutually exclusive
-				tr.classed("traded", true);  
-			  else if (row[39]=="TRUE") // No need to mark as a multiple if it's traded or personal
-				tr.classed("multiple", true);
+				tr.classed("traded", true);
+			  else
+			  {
+				  tr.classed("ft", true);
+				  if (row[39]=="TRUE") // No need to mark as a multiple if it's traded or personal
+					tr.classed("multiple", true);
+			  }
 			}
 			
 			filterTable();
@@ -97,8 +101,8 @@ function addBall(row, first)
 	if (ball == undefined)
 		console.log(row[7]);
 	// Reflow after first ball loads to make sure columns line up with header
-	var floatHeader = first ? " onLoad='floatHeader()' " : "";
-	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'"+floatHeader+"/></td>";
+	var loaded = first ? " onLoad='loaded()' " : "";
+	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'"+loaded+"/></td>";
 }
 function addLevel(row)
 {
@@ -178,10 +182,32 @@ function loadMsikma(img)
 	img.src = "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/"+shinyLink+"/"+pokemon+".png"
 }
 
-function floatHeader()
+function loaded()
 {
 	var $table = $('table');
 	$table.floatThead();
+	
+	const params = new Proxy(new URLSearchParams(window.location.search), {
+	  get: (searchParams, prop) => searchParams.get(prop),
+	});
+	
+	var needFilter = false;
+	var type = params.type;
+	if (type)
+	{
+		$("input[name='showType'][value="+type+"]").prop('checked', true); 	
+		needFilter = true;
+	}
+	
+	var filter = params.filter;
+	if (filter)
+	{
+		$("#filter").prop('value', filter);
+		needFilter = true;
+	}
+	if (needFilter)
+		filterTable();
+	
 }
 
 function reflow()
@@ -192,11 +218,15 @@ function reflow()
 
 function filterTable() {
   // Declare variables
-  var traded, personal, multiples, showTraded, showPersonal, showMultiples, filter, filterText;
+  var traded, ft, personal, allPokemon, multiples, showTraded, showFT, showPersonal, showAll, showMultiples, filter, filterText;
   traded = document.getElementById("showTraded");
   showTraded = traded.checked;
+  ft = document.getElementById("showFT");
+  showFT = ft.checked;
   personal = document.getElementById("showPersonal");
   showPersonal = personal.checked;
+  allPokemon = document.getElementById("showAll");
+  showAll = allPokemon.checked;
   multiples = document.getElementById("showMultiples");
   showMultiples = multiples.checked;
   filter = document.getElementById("filter");
@@ -205,27 +235,36 @@ function filterTable() {
   var showSelector = "#eventTable tbody tr"
   $(showSelector).hide();
   
-  if (!showTraded||!showPersonal||!showMultiples)
+  
+  if (showAll)
+  {
+	  if (!showMultiples)
+	  {
+		  showSelector += ":not(.multiple)";
+	  }
+  }
+  else
   {
 	  showSelector += ":not("
-	  if (!showTraded)
+	  if (showTraded)
 	  {
-		  showSelector += ".traded";
+		  showSelector += ".personal,.ft";
 	  }
-	  if (!showPersonal)
+	  else if (showPersonal)
 	  {
-		  if (!showTraded)
-			  showSelector += ",";
-		  showSelector += ".personal";
+		  showSelector += ".traded,.ft";
+	  }
+	  else if (showFT)
+	  {
+		  showSelector += ".traded,.personal";
 	  }
 	  if (!showMultiples)
 	  {
-		  if (!showTraded||!showPersonal)
-			  showSelector += ",";
-		  showSelector += ".multiple";
+		  showSelector += ",.multiple";
 	  }
 	  showSelector += ")";
   }
+  
   showSelector += " td"
   $(showSelector).filter(function () {
         var $t = $(this);
