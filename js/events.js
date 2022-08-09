@@ -84,6 +84,7 @@ function addBall(row, first)
 	var ball = row[7] == "" ? "" : ballMap.get(row[7]);
 	if (ball == undefined)
 		console.log(row[7]);
+	// Reflow after first ball loads to make sure columns line up with header
 	var reflow = first ? " onLoad='reflow()' " : "";
 	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'"+reflow+"/></td>";
 }
@@ -112,7 +113,7 @@ function checkImageSize(img)
 {
 	if(img.naturalHeight == 66 && img.naturalWidth == 78)
 	{
-		//loadGen7Animated(img);
+		loadGen7Animated(img);
 	}
 }
 
