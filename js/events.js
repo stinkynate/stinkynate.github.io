@@ -187,6 +187,7 @@ function loaded()
 	var $table = $('table');
 	$table.floatThead();
 	
+	// Check query strings
 	const params = new Proxy(new URLSearchParams(window.location.search), {
 	  get: (searchParams, prop) => searchParams.get(prop),
 	});
@@ -203,6 +204,13 @@ function loaded()
 	if (filter)
 	{
 		$("#filter").prop('value', filter);
+		needFilter = true;
+	}
+	
+	var multiples = params.multiples;
+	if (multiples)
+	{
+		$("#showMultiples").prop('checked', multiples.toLowerCase() === 'true');
 		needFilter = true;
 	}
 	if (needFilter)
