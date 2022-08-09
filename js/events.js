@@ -37,14 +37,28 @@ function parseEvents()
 			  rowHtml += addBall(row, i==3);
 			  rowHtml += addLevel(row);
 			  rowHtml += addGender(row);
+			  rowHtml += addAbility(row);
+			  rowHtml += addNature(row);
 			  rowHtml += addOT(row);
 			  rowHtml += addTID(row);
+			  rowHtml += addDate(row);
+			  rowHtml += addNotes(row);
+			  rowHtml += addProofType(row);
+			  rowHtml += addProofName(row);
+			  rowHtml += addLocation(row);
 			  rowHtml += addHistory(row);
-			  d3.select("tbody").insert("tr").html(rowHtml);
+			  var tr = d3.select("tbody").insert("tr").html(rowHtml);
+			  if (row[36]=="TRUE")
+				tr.classed("personal", true);
+			  else if (row[37]=="TRUE")
+				tr.classed("traded", true);  
 			}
 			
 			var $table = $('table');
 			$table.floatThead();
+			
+			filterTable("showTraded", "traded");
+			filterTable("showPersonal", "personal");
 		}
 	});
 
@@ -96,6 +110,14 @@ function addGender(row)
 {
 	return "<td>"+row[9]+ "</td>";
 }
+function addAbility(row)
+{
+	return "<td>"+row[10]+ "</td>";
+}
+function addNature(row)
+{
+	return "<td>"+row[11]+ "</td>";
+}
 function addOT(row)
 {
 	return "<td>"+row[24]+ "</td>";
@@ -103,6 +125,26 @@ function addOT(row)
 function addTID(row)
 {
 	return "<td>"+row[25]+ "</td>";
+}
+function addDate(row)
+{
+	return "<td>"+row[26]+ "</td>";
+}
+function addNotes(row)
+{
+	return "<td>"+row[31]+ "</td>";
+}
+function addProofType(row)
+{
+	return "<td>"+row[27]+ "</td>";
+}
+function addProofName(row)
+{
+	return "<td>"+row[28]+ "</td>";
+}
+function addLocation(row)
+{
+	return "<td>"+row[32]+ "</td>";
 }
 function addHistory(row)
 {
@@ -143,4 +185,25 @@ function reflow()
 	var $table = $('table');
 	$table.floatThead('reflow');
 	console.log("reflowing");
+}
+
+function filterTable(name, className) {
+  // Declare variables
+  var input, filter, table, tr, i;
+  input = document.getElementById(name);
+  filter = input.checked;
+  table = document.getElementById("eventTable");
+  tr = table.getElementsByClassName(className);
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+	if (filter)
+		tr[i].style.display = "";
+	else
+		tr[i].style.display = "none";
+  }
+  
+  $("table tbody tr").removeClass("odd even");
+  $("table tbody tr:visible:odd").addClass("odd");
+  $("table tbody tr:visible:even").addClass("even");
 }

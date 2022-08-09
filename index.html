@@ -21,17 +21,21 @@
   
   <style>
 	table, th, td {
-	  border: 1px solid black;
 	  text-align: center;
 	  border-collapse: collapse;
-	  position: sticky;
 	}
 	td, th {
 	  border: 1px solid #ddd;
 	  padding: 2px;
 	}
+    tr.even{background-color: #f2f2f2;}
+    tr:hover {background-color: #ddd;}
+
 	th {
-	  background-color: red;
+	  padding-top: 12px;
+	  padding-bottom: 12px;
+	  background-color: #04AA6D;
+	  color: white;
 	}
 	img {
 	  vertical-align: middle;
@@ -48,56 +52,55 @@
 	}
 	div.msikma {
 		height: 40px;
+		overflow: hidden;
 	}
-    tr:nth-child(even){background-color: #f2f2f2;}
-    tr:hover {background-color: #ddd;}
-
-	th {
-	  padding-top: 12px;
-	  padding-bottom: 12px;
-	  text-align: left;
-	  background-color: #04AA6D;
-	  color: white;
+	.personal 
+	{
+		background-color: #70AD47 !important; 
+	}
+	.traded
+	{
+		background-color: #C00000 !important;
+		text-decoration: line-through;
 	}
   </style>
 </head>
 
-<body">
-  <header class="mas">
-    <div class="container h-100 align-items-center">
-      <div class="row">
-		<p>Hello</p>
-        <div class="col-md-12">
-          <div class="mx-auto">
-
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col" align="left">#</th>
-                  <th scope="col" align="left">Tag</th>
-				  <th scope="col" align="left">Event</th>
-				  <th scope="col" align="left">Pokemon</th>
-				  <th scope="col" align="left">Shiny</th>
-				  <th scope="col" align="left">Ball</th>
-				  <th scope="col" align="left">Level</th>
-				  <th scope="col" align="left">Gender</th>
-				  <th scope="col" align="left">OT</th>
-				  <th scope="col" align="left">ID</th>
-				  <th scope="col" align="left">History</th>
-                </tr>
-              </thead>
-              <tbody>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
-
-    </div>
-
-  </header>
+<body>
+	<div class="row">
+		<p>Welcome to Stinkynate's (in progress) events "sheet"!</p>
+		<input type="checkbox" id="showTraded" name="showTraded" onclick="filterTable('showTraded', 'traded')" checked="true">
+		<label for="showTraded"> Show Traded</label>
+		<input type="checkbox" id="showPersonal" name="showPersonal" onclick="filterTable('showPersonal', 'personal')" checked="true">
+		<label for="showPersonal"> Show Personal</label>
+		<br>
+		
+		<table class="table" id="eventTable">
+		  <thead>
+			<tr>
+			  <th scope="col" align="left">#</th>
+			  <th scope="col" align="left">Tag</th>
+			  <th scope="col" align="left">Event</th>
+			  <th scope="col" align="left">Pokemon</th>
+			  <th scope="col" align="left">Shiny</th>
+			  <th scope="col" align="left">Ball</th>
+			  <th scope="col" align="left">Level</th>
+			  <th scope="col" align="left">Gender</th>
+			  <th scope="col" align="left">Ability</th>
+			  <th scope="col" align="left">Nature</th>
+			  <th scope="col" align="left">OT</th>
+			  <th scope="col" align="left">ID</th>
+			  <th scope="col" align="left">Date</th>
+			  <th scope="col" align="left">Notes</th>
+			  <th scope="col" align="left">Proof Type</th>
+			  <th scope="col" align="left">Proof Name</th>
+			  <th scope="col" align="left">Location</th>
+			  <th scope="col" align="left">History</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		</table>
+	</div>
 </body>
 
 </html>
