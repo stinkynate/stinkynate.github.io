@@ -34,7 +34,7 @@ function parseEvents()
 			  rowHtml += addEvent(row);
 			  rowHtml += addPokemon(row,i);
 			  rowHtml += addShiny(row);
-			  rowHtml += addBall(row);
+			  rowHtml += addBall(row, i==3);
 			  rowHtml += addLevel(row);
 			  rowHtml += addGender(row);
 			  rowHtml += addOT(row);
@@ -44,9 +44,7 @@ function parseEvents()
 			}
 			
 			var $table = $('table');
-			$table.floatThead({scrollContainer: function($table){
-        return $table.closest('.mx-auto');
-			}});
+			$table.floatThead();
 		}
 	});
 
@@ -69,9 +67,9 @@ function addPokemon(row, i)
 	
 	var address = "https://projectpokemon.org/images/sprites-models/swsh-"+shinyLink+"-sprites/"+pokemon+".gif";
 	var onError = "loadGen7Animated(this)";
-	if (pokemon.startsWith("http"))
+	if (row[5].startsWith("http"))
 	{
-		address = pokemon;
+		address = row[5];
 		onError = "";
 	}
 	
@@ -81,12 +79,13 @@ function addShiny(row)
 {
 	return "<td>"+row[6]+ "</td>";
 }
-function addBall(row)
+function addBall(row, first)
 {
 	var ball = row[7] == "" ? "" : ballMap.get(row[7]);
 	if (ball == undefined)
 		console.log(row[7]);
-	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'/></td>";
+	var reflow = first ? " onLoad='reflow()' " : "";
+	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'"+reflow+"/></td>";
 }
 function addLevel(row)
 {
@@ -113,7 +112,7 @@ function checkImageSize(img)
 {
 	if(img.naturalHeight == 66 && img.naturalWidth == 78)
 	{
-		loadGen7Animated(img);
+		//loadGen7Animated(img);
 	}
 }
 
@@ -138,3 +137,9 @@ function loadMsikma(img)
 	img.src = "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/"+shinyLink+"/"+pokemon+".png"
 }
 
+function reflow()
+{
+	var $table = $('table');
+	$table.floatThead('reflow');
+	console.log("reflowing");
+}
