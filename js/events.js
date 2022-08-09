@@ -276,7 +276,7 @@ function filterTable() {
   showSelector += " td"
   $(showSelector).filter(function () {
         var $t = $(this);
-		if ($t.text().toLowerCase().indexOf(filterText) > -1) {
+		if ($t.text().toLowerCase().indexOf(filterText.toLowerCase()) > -1) {
 			return true;
 		}
         return false;
