@@ -42,8 +42,14 @@ function parseEvents()
 			  rowHtml += addHistory(row);
 			  d3.select("tbody").insert("tr").html(rowHtml);
 			}
+			
+			var $table = $('table');
+			$table.floatThead({scrollContainer: function($table){
+        return $table.closest('.mx-auto');
+			}});
 		}
 	});
+
 }
 
 function addTag(row)
@@ -58,9 +64,18 @@ function addPokemon(row, i)
 {
 	var shinyLink = row[6] == "" ? "normal" : "shiny";
 	var pokemon = row[4].toLowerCase();
-	if (row[5] <> "")
+	if (row[5] != "")
 		pokemon = row[5].toLowerCase();
-	return "<td><div><img class='pokemon' data-pokemon='"+pokemon+"' data-shiny='"+row[6]+"' src='https://projectpokemon.org/images/sprites-models/swsh-"+shinyLink+"-sprites/"+pokemon+".gif' onload='checkImageSize(this)' onerror='loadGen7Animated(this)' height='40'/></div>"+row[4]+ "</td>";
+	
+	var address = "https://projectpokemon.org/images/sprites-models/swsh-"+shinyLink+"-sprites/"+pokemon+".gif";
+	var onError = "loadGen7Animated(this)";
+	if (pokemon.startsWith("http"))
+	{
+		address = pokemon;
+		onError = "";
+	}
+	
+	return "<td><div><img class='pokemon' data-pokemon='"+pokemon+"' data-shiny='"+row[6]+"' src='"+address+"' onload='checkImageSize(this)' onerror='"+onError+"' height='40'/></div>"+row[4]+ "</td>";
 }
 function addShiny(row)
 {
@@ -68,10 +83,10 @@ function addShiny(row)
 }
 function addBall(row)
 {
-	var ball = row[7] == "" ? "" : ballMap.get(row[6]);
+	var ball = row[7] == "" ? "" : ballMap.get(row[7]);
 	if (ball == undefined)
 		console.log(row[7]);
-	return "<td><img class='ball' src='"+ball+"' alt='"+row[6]+"' title='"+row[6]+"'/></td>";
+	return "<td><img class='ball' src='"+ball+"' alt='"+row[7]+"' title='"+row[7]+"'/></td>";
 }
 function addLevel(row)
 {
