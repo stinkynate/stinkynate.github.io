@@ -27,7 +27,7 @@ body {
 
 .box .row.footer {
   margin: 0 5px 0 5px;
-  flex: 0 1 40px;
+  flex: 0 1 auto;
 }
 
 .filterRadio {
@@ -63,9 +63,10 @@ th {
   background-color: #04AA6D;
   color: white;
 }
-thead tr {
+thead tr th {
   position: sticky;
-  top: 0;
+  top: -1px;
+  
 }
 img {
   vertical-align: middle;
