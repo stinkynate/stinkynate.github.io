@@ -63,6 +63,10 @@ th {
   background-color: #04AA6D;
   color: white;
 }
+thead tr {
+  position: sticky;
+  top: 0;
+}
 img {
   vertical-align: middle;
 }

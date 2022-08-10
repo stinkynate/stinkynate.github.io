@@ -183,12 +183,7 @@ function loadMsikma(img)
 }
 
 function loaded()
-{
-	 var $table = $('#eventTable');
-	 $table.floatThead({
-		position: 'fixed'
-	});
-	
+{	
 	// Check query strings
 	const params = new Proxy(new URLSearchParams(window.location.search), {
 	  get: (searchParams, prop) => searchParams.get(prop),
@@ -218,14 +213,6 @@ function loaded()
 	if (needFilter)
 		filterTable();
 	
-}
-
-function reflow()
-{
-	$("#tableWrapper").scrollTop(0);
-	
-	var $table = $('table');
-	$table.floatThead('reflow');
 }
 
 function filterTable() {
@@ -289,6 +276,4 @@ function filterTable() {
   $("table tbody tr").removeClass("odd even");
   $("table tbody tr:visible:odd").addClass("odd");
   $("table tbody tr:visible:even").addClass("even");
-  
-  reflow();
 }
