@@ -94,3 +94,7 @@ div.msikma {
 	background-color: #d1c449 !important;
 	text-decoration: line-through;
 }
+.wrongGen
+{
+	background-color: yellow;
+}

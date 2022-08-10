@@ -146,7 +146,10 @@ function addProofName(row)
 }
 function addLocation(row)
 {
-	return "<td>"+row[32]+ "</td>";
+	
+	var wrongGen = row[34] != row[35] ? " class='wrongGen'" : "";
+	var altText = " alt='Current: "+row[34]+" / Original: "+row[35]+"' title='Current: "+row[34]+" / Original: "+row[35]+"'"
+	return "<td"+wrongGen+altText+">"+row[32]+ "</td>";
 }
 function addHistory(row)
 {
