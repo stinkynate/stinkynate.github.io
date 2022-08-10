@@ -4,6 +4,8 @@
 <meta charset=”UTF-8">
 <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
 <title>Events</title>
+  <link rel="stylesheet" href="./style.css">
+  
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="js/papaparse.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,97 +20,59 @@
   <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
   
   <script src="js/events.js"></script>
-  
-  <style>
-	table, th, td {
-	  text-align: center;
-	  border-collapse: collapse;
-	}
-	td, th {
-	  border: 1px solid #ddd;
-	  padding: 2px;
-	}
-    tr.even{background-color: #f2f2f2;}
-    tr:hover {background-color: #ddd;}
-
-	th {
-	  padding-top: 12px;
-	  padding-bottom: 12px;
-	  background-color: #04AA6D;
-	  color: white;
-	}
-	img {
-	  vertical-align: middle;
-	}
-	img.pokemon {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-	}
-	img.msikma {
-		height: auto;
-		position: relative;
-		top: -14px;
-	}
-	div.msikma {
-		height: 40px;
-		overflow: hidden;
-	}
-	.personal 
-	{
-		background-color: #70AD47 !important; 
-	}
-	.traded
-	{
-		background-color: #C00000 !important;
-		text-decoration: line-through;
-	}
-  </style>
 </head>
 
 <body>
-	<div class="row">
-		<p>Welcome to Stinkynate's (in progress) events "sheet"!</p>
-		<label for="filter">Text Filter:</label>
-		<input id="filter" name="filter" onchange="filterTable()" onkeyup="filterTable()">
-		<input type="radio" id="showFT" name="showType" onclick="filterTable()" value="ft" checked=true>
-		<label for="showFT"> Show FT</label>
-		<input type="radio" id="showTraded" name="showType" onclick="filterTable()" value="traded">
-		<label for="showTraded"> Show Traded</label>
-		<input type="radio" id="showPersonal" name="showType" onclick="filterTable()" value="personal">
-		<label for="showPersonal"> Show Personal</label>
-		<input type="radio" id="showAll" name="showType" onclick="filterTable()" value="all">
-		<label for="showAll"> Show All</label>
-		
-		<input type="checkbox" id="showMultiples" name="showMultiples" onclick="filterTable()">
-		<label for="showMultiples"> Show Multiples</label>
-		<br>
-		
-		<table class="table" id="eventTable">
-		  <thead>
-			<tr>
-			  <th scope="col" align="left">#</th>
-			  <th scope="col" align="left">Tag</th>
-			  <th scope="col" align="left">Event</th>
-			  <th scope="col" align="left">Pokemon</th>
-			  <th scope="col" align="left">Shiny</th>
-			  <th scope="col" align="left">Ball</th>
-			  <th scope="col" align="left">Level</th>
-			  <th scope="col" align="left">Gender</th>
-			  <th scope="col" align="left">Ability</th>
-			  <th scope="col" align="left">Nature</th>
-			  <th scope="col" align="left">OT</th>
-			  <th scope="col" align="left">ID</th>
-			  <th scope="col" align="left">Date</th>
-			  <th scope="col" align="left">Notes</th>
-			  <th scope="col" align="left">Proof Type</th>
-			  <th scope="col" align="left">Proof Name</th>
-			  <th scope="col" align="left">Location</th>
-			  <th scope="col" align="left">History</th>
-			</tr>
-		  </thead>
-		  <tbody>
-		</table>
+	<div class="box">
+		<div class="row header">
+			<p>Welcome to Stinkynate's (in progress) events "sheet"!</p>
+			<label for="filter">Text Filter:</label>
+			<input id="filter" name="filter" onchange="filterTable()" onkeyup="filterTable()">
+			<div class="filterRadio">
+				<input type="radio" id="showFT" name="showType" onclick="filterTable()" value="ft" checked=true class="radio">
+				<label for="showFT" class="radioLabel">Show FT</label>
+				<input type="radio" id="showTraded" name="showType" onclick="filterTable()" value="traded" class="radio">
+				<label for="showTraded" class="radioLabel">Show Traded</label>
+				<input type="radio" id="showPersonal" name="showType" onclick="filterTable()" value="personal" class="radio">
+				<label for="showPersonal" class="radioLabel">Show Personal</label>
+				<input type="radio" id="showAll" name="showType" onclick="filterTable()" value="all" class="radio">
+				<label for="showAll" class="radioLabel">Show All</label>
+			</div>
+			&nbsp;
+			<input type="checkbox" id="showMultiples" name="showMultiples" onclick="filterTable()" class="radio">
+			<label for="showMultiples" class="radioLabel">Show Multiples</label>
+			<br>
+		</div>
+		<div class="row content" id="tableWrapper">
+			<table class="table" id="eventTable">
+			  <thead>
+				<tr>
+				  <th scope="col" align="left">#</th>
+				  <th scope="col" align="left">Tag</th>
+				  <th scope="col" align="left">Event</th>
+				  <th scope="col" align="left">Pokemon</th>
+				  <th scope="col" align="left">Shiny</th>
+				  <th scope="col" align="left">Ball</th>
+				  <th scope="col" align="left">Level</th>
+				  <th scope="col" align="left">Gender</th>
+				  <th scope="col" align="left">Ability</th>
+				  <th scope="col" align="left">Nature</th>
+				  <th scope="col" align="left">OT</th>
+				  <th scope="col" align="left">ID</th>
+				  <th scope="col" align="left">Date</th>
+				  <th scope="col" align="left">Notes</th>
+				  <th scope="col" align="left">Proof Type</th>
+				  <th scope="col" align="left">Proof Name</th>
+				  <th scope="col" align="left">Location</th>
+				  <th scope="col" align="left">History</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			</table>
+		</div>
+		<div class="row footer">
+			<p><b>Sprite credit: </b><a href="https://www.pkparaiso.com/espada_escudo/sprites_pokemon.php">pkparaiso</a>, <a href="https://projectpokemon.org/docs/spriteindex_148/">Project Pokemon</a>, <a href="https://msikma.github.io/pokesprite/overview/dex-gen8.html">PokéSprite</a></p>
+		</div>
 	</div>
 </body>
 

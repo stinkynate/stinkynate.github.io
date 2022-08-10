@@ -184,8 +184,10 @@ function loadMsikma(img)
 
 function loaded()
 {
-	var $table = $('table');
-	$table.floatThead();
+	 var $table = $('#eventTable');
+	 $table.floatThead({
+		position: 'fixed'
+	});
 	
 	// Check query strings
 	const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -220,6 +222,8 @@ function loaded()
 
 function reflow()
 {
+	$("#tableWrapper").scrollTop(0);
+	
 	var $table = $('table');
 	$table.floatThead('reflow');
 }

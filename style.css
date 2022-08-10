@@ -1,0 +1,91 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+  /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+  margin: 0 5px 5px 5px
+}
+
+.box .row.content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.box .row.footer {
+  margin: 0 5px 0 5px;
+  flex: 0 1 40px;
+}
+
+.filterRadio {
+  border: 1px solid #000;
+  padding-bottom: 2px;
+  display: inline;
+}
+
+.radioLabel {
+	position: relative;
+	top: 2px;
+}
+
+.radio {
+	position: relative;
+	top: 3px;
+}
+
+table, th, td {
+  text-align: center;
+  border-collapse: collapse;
+}
+td, th {
+  border: 1px solid #ddd;
+  padding: 2px;
+}
+tr.even{background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #04AA6D;
+  color: white;
+}
+img {
+  vertical-align: middle;
+}
+img.pokemon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+img.msikma {
+	height: auto;
+	position: relative;
+	top: -14px;
+}
+div.msikma {
+	height: 40px;
+	overflow: hidden;
+}
+.personal 
+{
+	background-color: #70AD47 !important; 
+}
+.traded
+{
+	background-color: #d1c449 !important;
+	text-decoration: line-through;
+}
