@@ -27,7 +27,7 @@
 		<div class="row header">
 			<p>Welcome to Stinkynate's (in progress) events "sheet"!</p>
 			<label for="filter">Text Filter:</label>
-			<input id="filter" name="filter" onchange="filterTable()" onkeyup="filterTable()">
+			<input id="filter" name="filter" onchange="filterTable()" onkeyup="filterKeyUp()" onchange="filterTable()">
 			<div class="filterRadio">
 				<input type="radio" id="showFT" name="showType" onclick="filterTable()" value="ft" checked=true class="radio">
 				<label for="showFT" class="radioLabel">Show FT</label>

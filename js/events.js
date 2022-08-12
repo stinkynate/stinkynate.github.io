@@ -14,6 +14,33 @@ Papa.parse("https://stinkynate.github.io/balls.csv"+"?_="+ (new Date).getTime(),
 
 function parseEvents()
 {
+	// Check query strings
+	const params = new Proxy(new URLSearchParams(window.location.search), {
+	  get: (searchParams, prop) => searchParams.get(prop),
+	});
+	
+	var needFilter = false;
+	var type = params.type;
+	if (type)
+	{
+		$("input[name='showType'][value="+type+"]").prop('checked', true); 	
+		needFilter = true;
+	}
+	
+	var filter = params.filter;
+	if (filter)
+	{
+		$("#filter").prop('value', filter);
+		needFilter = true;
+	}
+	
+	var multiples = params.multiples;
+	if (multiples)
+	{
+		$("#showMultiples").prop('checked', multiples.toLowerCase() === 'true');
+		needFilter = true;
+	}
+	
 	Papa.parse("https://stinkynate.github.io/events.csv"+"?_="+ (new Date).getTime(), {
 		worker: true,
 		//header: true,
@@ -188,35 +215,16 @@ function loadMsikma(img)
 
 function loaded()
 {	
-	// Check query strings
-	const params = new Proxy(new URLSearchParams(window.location.search), {
-	  get: (searchParams, prop) => searchParams.get(prop),
-	});
-	
-	var needFilter = false;
-	var type = params.type;
-	if (type)
-	{
-		$("input[name='showType'][value="+type+"]").prop('checked', true); 	
-		needFilter = true;
-	}
-	
-	var filter = params.filter;
-	if (filter)
-	{
-		$("#filter").prop('value', filter);
-		needFilter = true;
-	}
-	
-	var multiples = params.multiples;
-	if (multiples)
-	{
-		$("#showMultiples").prop('checked', multiples.toLowerCase() === 'true');
-		needFilter = true;
-	}
-	if (needFilter)
-		filterTable();
-	
+	filterTable();
+}
+
+function filterKeyUp()
+{
+  var multiples = document.getElementById("showMultiples");
+  var showMultiples = multiples.checked;
+  
+  if (!showMultiples)
+	filterTable();
 }
 
 function filterTable() {
