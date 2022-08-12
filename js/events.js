@@ -58,6 +58,7 @@ function parseEvents()
 				  if (row[39]=="TRUE") // No need to mark as a multiple if it's traded or personal
 					tr.classed("multiple", true);
 			  }
+			  
 			}
 			
 			filterTable();

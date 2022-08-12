@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+body.dark
+{
+	background-color: #212936;
+	color: #c5c8c6;
+}
+
 .box {
   display: flex;
   flex-flow: column;
@@ -36,6 +42,11 @@ body {
   display: inline;
 }
 
+.dark .filterRadio 
+{
+	border: 1px solid gray;
+}
+
 .radioLabel {
 	position: relative;
 	top: 2px;
@@ -57,11 +68,22 @@ td, th {
 tr.even{background-color: #f2f2f2;}
 tr:hover {background-color: #ddd;}
 
+.dark td, .dark th
+{
+	border: 1px solid gray;
+}
+.dark tr.even{background-color: #394150;}
+.dark tr:hover{background-color: #32302f;}
+
 th {
   padding-top: 12px;
   padding-bottom: 12px;
   background-color: #04AA6D;
   color: white;
+}
+.dark th{
+  background-color: #212936;
+  color: inherit;
 }
 thead tr th {
   position: sticky;
@@ -85,16 +107,37 @@ div.msikma {
 	height: 40px;
 	overflow: hidden;
 }
-.personal 
+tr.personal 
 {
 	background-color: #70AD47 !important; 
 }
-.traded
+.dark tr.personal
+{
+	background-color: #4B51B3 !important; 
+}
+tr.traded
 {
 	background-color: #d1c449 !important;
 	text-decoration: line-through;
 }
-.wrongGen
+.dark tr.traded
+{
+	background-color: #610061 !important;
+}
+tr td.wrongGen
 {
 	background-color: yellow;
+}
+.dark tr td.wrongGen
+{
+	background-color: #BF7C00 !important;
+}
+
+.dark a:link
+{
+	color: lightskyblue;
+}
+.dark a:visited, .dark a:hover, .dark a:active
+{
+	color:#6d4b8d;
 }
