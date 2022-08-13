@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  font-size: 100%;
 }
 
 body.dark
@@ -88,7 +89,6 @@ th {
 thead tr th {
   position: sticky;
   top: -1px;
-  
 }
 img {
   vertical-align: middle;
@@ -107,6 +107,11 @@ div.msikma {
 	height: 40px;
 	overflow: hidden;
 }
+td.event
+{
+	font-size: 0.75em;
+}
+
 tr.personal 
 {
 	background-color: #70AD47 !important; 

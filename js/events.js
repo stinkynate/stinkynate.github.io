@@ -100,7 +100,7 @@ function addTag(row)
 }
 function addEvent(row)
 {
-	return "<td><a href='"+row[3]+"' target='_blank'>"+row[2]+ "</a></td>"
+	return "<td class='event'><a href='"+row[3]+"' target='_blank'>"+row[2]+ "</a></td>"
 }
 function addPokemon(row, i)
 {
@@ -117,7 +117,7 @@ function addPokemon(row, i)
 		onError = "";
 	}
 	
-	return "<td><div><img class='pokemon' data-pokemon='"+pokemon+"' data-shiny='"+row[6]+"' src='"+address+"' onload='checkImageSize(this)' onerror='"+onError+"' height='40'/></div>"+row[4]+ "</td>";
+	return "<td><div><img class='pokemon' data-pokemon='"+pokemon+"' data-shiny='"+row[6]+"' src='"+address+"' onload='checkImageSize(this)' onerror='"+onError+"' height='30'/></div>"+row[4]+ "</td>";
 }
 function addShiny(row)
 {
