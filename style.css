@@ -107,7 +107,7 @@ div.msikma {
 	height: 40px;
 	overflow: hidden;
 }
-td.event
+.event, .pokemon, .notes, .history, .proofName
 {
 	font-size: 0.75em;
 }

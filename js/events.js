@@ -117,7 +117,7 @@ function addPokemon(row, i)
 		onError = "";
 	}
 	
-	return "<td><div><img class='pokemon' data-pokemon='"+pokemon+"' data-shiny='"+row[6]+"' src='"+address+"' onload='checkImageSize(this)' onerror='"+onError+"' height='30'/></div>"+row[4]+ "</td>";
+	return "<td class='pokemon'><div><img class='pokemon' data-pokemon='"+pokemon+"' data-shiny='"+row[6]+"' src='"+address+"' onload='checkImageSize(this)' onerror='"+onError+"' height='30'/></div>"+row[4]+ "</td>";
 }
 function addShiny(row)
 {
@@ -162,7 +162,7 @@ function addDate(row)
 }
 function addNotes(row)
 {
-	return "<td>"+row[31]+ "</td>";
+	return "<td class='notes'>"+row[31]+ "</td>";
 }
 function addProofType(row)
 {
@@ -170,7 +170,7 @@ function addProofType(row)
 }
 function addProofName(row)
 {
-	return "<td>"+row[28]+ "</td>";
+	return "<td class='proofName'>"+row[28]+ "</td>";
 }
 function addLocation(row)
 {
@@ -181,7 +181,7 @@ function addLocation(row)
 }
 function addHistory(row)
 {
-	return "<td>"+row[30]+ "</td>";
+	return "<td class='history'>"+row[30]+ "</td>";
 }
 
 function checkImageSize(img)
