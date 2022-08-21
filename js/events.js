@@ -75,6 +75,7 @@ function parseEvents()
 			  rowHtml += addLocation(row);
 			  rowHtml += addHistory(row);
 			  var tr = d3.select("tbody").insert("tr").html(rowHtml);
+			  tr.attr("row", i);
 			  if (row[36]=="TRUE")
 				tr.classed("personal", true);
 			  else if (row[37]=="TRUE") // Keep these mutually exclusive
