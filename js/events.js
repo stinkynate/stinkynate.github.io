@@ -182,7 +182,21 @@ function addLocation(row)
 }
 function addHistory(row)
 {
-	return "<td class='history'>"+row[30]+ "</td>";
+	const links = row[29] == "" ? [] : row[29].split(";");
+	const trades = (row[30].match(/>/g) || []);
+	var hist = row[30];
+	var lastIndex = 0;
+	for (var i = 0; i < links.length && i < trades.length; i++)
+	{
+		const index = row[30].indexOf(">", lastIndex);
+		if (index == -1)
+			break;
+		lastIndex = index;
+		console.log(links[i]);
+		const href = "<a href='" + links[i] + "' target='_blank'>&gt</a>";
+		hist = hist.substring(0, index) + href + hist.substring(index+1);
+	}
+	return "<td class='history'>"+hist+ "</td>";
 }
 
 function checkImageSize(img)
