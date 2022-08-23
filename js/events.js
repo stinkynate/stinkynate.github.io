@@ -184,19 +184,23 @@ function addHistory(row)
 {
 	const links = row[29] == "" ? [] : row[29].split(";");
 	const trades = (row[30].match(/>/g) || []);
-	var hist = row[30];
+	const hist = row[30];
+	var linkedhist = "";
 	var lastIndex = 0;
 	for (var i = 0; i < links.length && i < trades.length; i++)
 	{
-		const index = row[30].indexOf(">", lastIndex);
+		const index = row[30].indexOf(">", lastIndex+1);
 		if (index == -1)
 			break;
-		lastIndex = index;
-		console.log(links[i]);
 		const href = "<a href='" + links[i] + "' target='_blank'>&gt</a>";
-		hist = hist.substring(0, index) + href + hist.substring(index+1);
+		linkedhist += hist.substring(lastIndex, index) + href;
+		lastIndex = index+1;
 	}
-	return "<td class='history'>"+hist+ "</td>";
+	if(lastIndex==0)
+		linkedHist = hist;
+	else
+		linkedhist += hist.substring(lastIndex);
+	return "<td class='history'>"+linkedhist+ "</td>";
 }
 
 function checkImageSize(img)
