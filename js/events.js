@@ -187,19 +187,23 @@ function addHistory(row)
 	const hist = row[30];
 	var linkedhist = "";
 	var lastIndex = 0;
-	for (var i = 0; i < links.length && i < trades.length; i++)
-	{
-		const index = row[30].indexOf(">", lastIndex+1);
-		if (index == -1)
-			break;
-		const href = "<a href='" + links[i] + "' target='_blank'>&gt</a>";
-		linkedhist += hist.substring(lastIndex, index) + href;
-		lastIndex = index+1;
-	}
-	if(lastIndex==0)
-		linkedHist = hist;
+	if (hist == "")
+		linkedhist = hist;
 	else
+	{
+		for (var i = 0; i < links.length && i < trades.length; i++)
+		{
+			const index = row[30].indexOf(">", lastIndex);
+			if (index == -1)
+				break;
+			var href = "<a href='" + links[i] + "' target='_blank'>&gt</a>";
+			if (links[i] == "")
+				href = "&gt";
+			linkedhist += hist.substring(lastIndex, index) + href;
+			lastIndex = index+1;
+		}
 		linkedhist += hist.substring(lastIndex);
+	}
 	return "<td class='history'>"+linkedhist+ "</td>";
 }
 
