@@ -146,7 +146,11 @@ tr td.wrongGen
 {
 	color:#6d4b8d;
 }
-.dark .personal a:visited, .dark a:hover, .dark a:active
+.dark .personal a:visited, .dark .personal a:hover, .dark .personal a:active
+{
+	color: darkcyan;
+}
+.dark .traded a:visited, .dark .traded a:hover, .dark .traded a:active
 {
 	color: darkcyan;
 }
