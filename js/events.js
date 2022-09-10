@@ -53,7 +53,7 @@ function parseEvents()
 			//d3.event.preventDefault();
 			for (var i = 3; i < results.data.length; i++) {
 			  var row = results.data[i];
-			  if (row.length <= 1 || row[4] == "" || row[38] == "TRUE")
+			  if (row.length <= 1 || row[4] == "" || row[37] == "TRUE")
 				  continue;
 
 			  var rowHtml = "<td>"+(i-2)+"</td>";
@@ -76,14 +76,14 @@ function parseEvents()
 			  rowHtml += addHistory(row);
 			  var tr = d3.select("tbody").insert("tr").html(rowHtml);
 			  tr.attr("row", i);
-			  if (row[36]=="TRUE")
+			  if (row[35]=="TRUE")
 				tr.classed("personal", true);
-			  else if (row[37]=="TRUE") // Keep these mutually exclusive
+			  else if (row[36]=="TRUE") // Keep these mutually exclusive
 				tr.classed("traded", true);
 			  else
 			  {
 				  tr.classed("ft", true);
-				  if (row[39]=="TRUE") // No need to mark as a multiple if it's traded or personal
+				  if (row[38]=="TRUE") // No need to mark as a multiple if it's traded or personal
 					tr.classed("multiple", true);
 			  }
 			  
@@ -151,40 +151,40 @@ function addNature(row)
 }
 function addOT(row)
 {
-	return "<td>"+row[24]+ "</td>";
+	return "<td>"+row[23]+ "</td>";
 }
 function addTID(row)
 {
-	return "<td>"+row[25]+ "</td>";
+	return "<td>"+row[24]+ "</td>";
 }
 function addDate(row)
 {
-	return "<td>"+row[26]+ "</td>";
+	return "<td>"+row[25]+ "</td>";
 }
 function addNotes(row)
 {
-	return "<td class='notes'>"+row[31]+ "</td>";
+	return "<td class='notes'>"+row[30]+ "</td>";
 }
 function addProofType(row)
 {
-	return "<td>"+row[27]+ "</td>";
+	return "<td>"+row[26]+ "</td>";
 }
 function addProofName(row)
 {
-	return "<td class='proofName'>"+row[28]+ "</td>";
+	return "<td class='proofName'>"+row[27]+ "</td>";
 }
 function addLocation(row)
 {
 	
-	var wrongGen = row[34] != row[35] ? " class='wrongGen'" : "";
-	var altText = " alt='Current: "+row[34]+" / Original: "+row[35]+"' title='Current: "+row[34]+" / Original: "+row[35]+"'"
-	return "<td"+wrongGen+altText+">"+row[32]+ "</td>";
+	var wrongGen = row[33] != row[34] ? " class='wrongGen'" : "";
+	var altText = " alt='Current: "+row[33]+" / Original: "+row[34]+"' title='Current: "+row[33]+" / Original: "+row[34]+"'"
+	return "<td"+wrongGen+altText+">"+row[31]+ "</td>";
 }
 function addHistory(row)
 {
-	const links = row[29] == "" ? [] : row[29].split(";");
-	const trades = (row[30].match(/>/g) || []);
-	const hist = row[30];
+	const links = row[28] == "" ? [] : row[28].split(";");
+	const trades = (row[29].match(/>/g) || []);
+	const hist = row[29];
 	var linkedhist = "";
 	var lastIndex = 0;
 	if (hist == "")
@@ -193,7 +193,7 @@ function addHistory(row)
 	{
 		for (var i = 0; i < links.length && i < trades.length; i++)
 		{
-			const index = row[30].indexOf(">", lastIndex);
+			const index = row[29].indexOf(">", lastIndex);
 			if (index == -1)
 				break;
 			var href = "<a href='" + links[i] + "' target='_blank'>&gt</a>";
