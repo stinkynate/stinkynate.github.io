@@ -114,7 +114,7 @@ function addPokemon(row, i)
 	var address = "https://projectpokemon.org/images/sprites-models/swsh-"+shinyLink+"-sprites/"+pokemon+".gif";
 	if (dexNum >= 906)
 	{
-		address = "https://www.serebii.net/pokedex-sv/icon/new/"+dexNum"+".png";
+		address = "https://www.serebii.net/pokedex-sv/icon/new/"+dexNum+".png";
 	}
 	
 	var onError = "loadGen7Animated(this)";
