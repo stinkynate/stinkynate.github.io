@@ -110,7 +110,13 @@ function addPokemon(row, i)
 	if (row[5] != "")
 		pokemon = row[5].toLowerCase();
 	
+	var dexNum = row[0];
 	var address = "https://projectpokemon.org/images/sprites-models/swsh-"+shinyLink+"-sprites/"+pokemon+".gif";
+	if (dexNum >= 906)
+	{
+		address = "https://www.serebii.net/pokedex-sv/icon/new/"+dexNum"+".png";
+	}
+	
 	var onError = "loadGen7Animated(this)";
 	if (row[5].startsWith("http"))
 	{
